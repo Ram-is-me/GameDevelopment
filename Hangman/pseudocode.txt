@@ -1,0 +1,21 @@
+Create a group of words
+Pick a random letter from the group of words as the secret word.
+Tell user to guess
+While(the user hasn't made too many incorrect guesses and hasn't guessed word):
+  Tell player how many incorrect guesses he has left
+  Show the player the letters he/she has guessed
+  Show player how much of the word he/she has guessed
+  Get player's next guess
+  While(player has entered a letter which has been already guessed):
+    Get player's next guess
+  Add the new guess to group of guesses
+  If the guess is in the word:
+    Tell player the guess is correct
+    Update the word guessed so far with new letter
+  Else
+    Tell player that guess is incorrect
+    Decrease number of guesses player has left
+If player has made too many incorrect guesses:
+  Player has been hanged
+Else
+  Player has won!
