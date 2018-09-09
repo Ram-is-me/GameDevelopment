@@ -230,7 +230,7 @@ int computerMove(vector<char> board, char computer)
   //New AI
   if(board[4]== human)
   {
-    if(board[0]==computer && board[2]==computer && board[6]==EMPTY && board[3]==EMPTY && board[1]==EMPTY)
+    if(board[0]==computer && board[2]==computer && board[6]==EMPTY && board[3]==EMPTY && board[1]==EMPTY)  //8 conditions for checking double attacks
     {
       int move = 6;
       cout<<move<<endl;
@@ -291,7 +291,7 @@ int computerMove(vector<char> board, char computer)
   }
   else
   {
-    if((board[0]==human && board[8] == human) || (board[2]==human && board[6] == human))
+    if((board[0]==human && board[8] == human) || (board[2]==human && board[6] == human)) //Conditions for checking DA when computer occupies centre
     {
       const int BEST_MOVES[] = {1,3,5,7,0,2,6,8,4};
       for(int i=0;i<board.size();i++)
@@ -365,3 +365,8 @@ void announceWinner(char winner, char computer, char human)
     cout<<"Try again to see if you can beat the AI!\n";
   }
 }
+
+//Improvements
+//Can make a better AI which will randomize all the "smart" moves available for it
+//Display of the board can be formatted
+//Can implement a multiplayer component where the opponent is a player from the network
