@@ -69,11 +69,11 @@ void instructions()
   cout<<"Make your move by entering a set of numbers from 0 to 8.\n";
   cout<<"It corresponds to the boxes shown below\n\n";
 
-  cout<<"0 | 1 | 2\n";
+  cout<<"1 | 2 | 3\n";
   cout<<"---------\n";
-  cout<<"3 | 4 | 5\n";
+  cout<<"4 | 5 | 6\n";
   cout<<"---------\n";
-  cout<<"6 | 7 | 8\n";
+  cout<<"7 | 8 | 9\n";
 
   cout<<"Prepare yourself!\n\n";
 }
@@ -92,10 +92,10 @@ int askNumber(string question, int high, int low)
 {
   int number;
   do{
-    cout<<question<<" ("<<low<<" - "<<high<<"): ";
+    cout<<question<<" ("<<low+1<<" - "<<high+1<<"): ";
     cin>>number;
-  } while(number>high || number<low);
-  return number;
+  } while(number>high+1 || number<low+1);
+  return number-1;
 }
 
 char humanPiece()
@@ -216,14 +216,133 @@ int computerMove(vector<char> board, char computer)
     }
   }
   //AI part to improve
-  const int BEST_MOVES[] = {4,0,2,6,8,1,3,5,7};
-  for(int i=0;i<board.size();i++)
+  // const int BEST_MOVES[] = {4,0,2,6,8,1,3,5,7};
+  // for(int i=0;i<board.size();i++)
+  // {
+  //   int move = BEST_MOVES[i];
+  //   if(isLegal(move,board))
+  //   {
+  //     cout<<move<<endl;
+  //     return move;
+  //   }
+  // }
+
+  //New AI
+  if(board[4]== human)
   {
-    int move = BEST_MOVES[i];
-    if(isLegal(move,board))
+    if(board[0]==computer && board[2]==computer && board[6]==EMPTY && board[3]==EMPTY && board[1]==EMPTY)
     {
+      int move = 6;
       cout<<move<<endl;
       return move;
+    }
+    else if(board[0]==computer && board[2]==computer && board[5]==EMPTY && board[8]==EMPTY && board[1]==EMPTY)
+    {
+      int move = 8;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[0]==computer && board[6]==computer && board[3]==EMPTY && board[7]==EMPTY && board[8]==EMPTY)
+    {
+      int move = 8;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[0]==computer && board[6]==computer && board[3]==EMPTY && board[1]==EMPTY && board[2]==EMPTY)
+    {
+      int move = 2;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[6]==computer && board[8]==computer && board[2]==EMPTY && board[5]==EMPTY && board[7]==EMPTY)
+    {
+      int move = 2;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[6]==computer && board[8]==computer && board[3]==EMPTY && board[0]==EMPTY && board[7]==EMPTY)
+    {
+      int move = 0;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[2]==computer && board[8]==computer && board[5]==EMPTY && board[0]==EMPTY && board[1]==EMPTY)
+    {
+      int move = 0;
+      cout<<move<<endl;
+      return move;
+    }
+    else if(board[2]==computer && board[8]==computer && board[5]==EMPTY && board[6]==EMPTY && board[7]==EMPTY)
+    {
+      int move = 6;
+      cout<<move<<endl;
+      return move;
+    }
+    const int BEST_MOVES[] = {4,0,2,6,8,1,3,5,7};
+    for(int i=0;i<board.size();i++)
+    {
+      int move = BEST_MOVES[i];
+      if(isLegal(move,board))
+      {
+        cout<<move<<endl;
+        return move;
+      }
+    }
+  }
+  else
+  {
+    if((board[0]==human && board[8] == human) || (board[2]==human && board[6] == human))
+    {
+      const int BEST_MOVES[] = {1,3,5,7,0,2,6,8,4};
+      for(int i=0;i<board.size();i++)
+      {
+        int move = BEST_MOVES[i];
+        if(isLegal(move,board))
+        {
+          cout<<move<<endl;
+          return move;
+        }
+      }
+    }
+    else
+    {
+      if(board[4]==computer)
+      {
+        if(board[0]==computer && board[2]==EMPTY && board[3]==EMPTY&&board[6]==EMPTY)
+        {
+          int move = 6;
+          cout<<move<<endl;
+          return move;
+        }
+        else if(board[2]==computer&&board[0]==EMPTY&&board[5]==EMPTY&&board[8]==EMPTY)
+        {
+          int move = 8;
+          cout<<move<<endl;
+          return move;
+        }
+        else if(board[6]==computer&&board[0]==EMPTY&&board[7]==EMPTY&&board[8]==EMPTY)
+        {
+          int move = 8;
+          cout<<move<<endl;
+          return move;
+        }
+        else if(board[8]==computer&&board[2]==EMPTY&&board[6]==EMPTY&&board[7]==EMPTY)
+        {
+          int move = 6;
+          cout<<move<<endl;
+          return move;
+        }
+      }
+      const int BEST_MOVES[] = {4,0,2,6,8,1,3,5,7};
+      for(int i=0;i<board.size();i++)
+      {
+        int move = BEST_MOVES[i];
+        if(isLegal(move,board))
+        {
+          cout<<move<<endl;
+          return move;
+        }
+      }
     }
   }
 }
